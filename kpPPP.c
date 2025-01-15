@@ -164,7 +164,6 @@ int main()
     }
 }
 
-// Функции для работы с матрицей
 int delete_digits(int** lvl_array, unsigned int size, int difficult)
 {
     int max = round(pow(size, 2) / 8. * difficult) + 1; // максимальное число пустых полей в матрице
@@ -355,7 +354,6 @@ int request_choice()
     }
 }
 
-// Функции для отрисовки поля
 int draw_lines(int size_lines)
 {
     for (int i = 0; i < size_lines; i++)
@@ -391,7 +389,6 @@ int pitch(int** lvl_array, unsigned int size)
     return 1;
 }
 
-// Функции для работы с файлами
 int save_game(int** lvl_array, unsigned int size, char path[])
 {
     FILE* file;
