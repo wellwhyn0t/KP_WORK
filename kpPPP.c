@@ -114,7 +114,7 @@ int main()
     unsigned int size;                          /* размер матрицы */
     char level_path[20] = "level_1.txt\0";      /* путь к уровню (исходно к уровню 1) */
     static char save_path[] = "saves.txt\0";    /* путь к файлу с сохранением */
-    srand(4);                          /* инициализирует генератор случайных чисел */
+    srand(time(NULL));                          /* инициализирует генератор случайных чисел */
     /* меню выбора */
     while (1)
     {
@@ -129,6 +129,7 @@ int main()
             /* проверка уровень с файлов уровней или с сохранения (номер уровня сохранения - 0, а других > 0) */
             if (level_number > 0)
             {
+
                 load_game(&level_choice, &size, level_path);
                 delete_digits(level_choice, size, difficult);
             }
@@ -167,14 +168,23 @@ int main()
 int delete_digits(int** lvl_array, unsigned int size, int difficult)
 {
     int max = round(pow(size, 2) / 8. * difficult) + 1; // максимальное число пустых полей в матрице
-    for (int counter = 0; counter < max; counter++)
-        lvl_array[random_number(size - 1)][random_number(size - 1)] = 0;
+    int counter = 0;
+    while (counter < max)
+    {
+        int letter = random_number(size - 1); //индекс рандомного числа (буква)
+        int digit = random_number(size - 1); //индекс рандомного числа (число)
+        if (lvl_array[letter][digit] != 0)
+        {
+            lvl_array[letter][digit] = 0;
+            counter++;
+        }
+    }
     return 1;
 }
 
 int random_number(int max)
 {
-    return (rand() % max) + 1;
+    return rand() % max;
 }
 
 int change_cell(int** lvl_array, int letter, int digit, int value)
